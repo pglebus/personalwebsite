@@ -5,6 +5,9 @@ TRACKING_SETUP.md
 # Resume PDF (add your actual resume separately)
 resume.pdf
 
+# Claude Code settings (do not make public)
+.claude/
+
 # OS files
 .DS_Store
 Thumbs.db

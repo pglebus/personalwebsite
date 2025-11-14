@@ -1,0 +1,477 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: #FFFFFF;
+    background: #000000;
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Animated stars background */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 60% 70%, white, transparent),
+        radial-gradient(1px 1px at 50% 50%, white, transparent),
+        radial-gradient(1px 1px at 80% 10%, white, transparent),
+        radial-gradient(2px 2px at 90% 60%, white, transparent),
+        radial-gradient(1px 1px at 33% 80%, white, transparent),
+        radial-gradient(1px 1px at 15% 55%, white, transparent);
+    background-size: 200% 200%;
+    background-position: 0% 0%;
+    animation: stars 200s linear infinite;
+    opacity: 0.6;
+    z-index: 0;
+    pointer-events: none;
+}
+
+@keyframes stars {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+/* Additional star layers */
+body::after {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        radial-gradient(circle at 10% 20%, rgba(255, 0, 110, 0.3) 0%, transparent 30%),
+        radial-gradient(circle at 90% 80%, rgba(56, 56, 236, 0.3) 0%, transparent 30%),
+        radial-gradient(circle at 50% 50%, rgba(131, 56, 236, 0.2) 0%, transparent 40%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+/* Navigation */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+    padding: 20px 40px;
+    display: flex;
+    gap: 30px;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.nav-link {
+    color: #FFFFFF;
+    text-decoration: none;
+    font-size: 1.1em;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 3px;
+    background: linear-gradient(90deg, #FF006E, #8338EC, #3A86FF);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+    width: 80%;
+}
+
+.nav-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    transform: translateY(-2px);
+}
+
+.nav-link.active {
+    background: rgba(131, 56, 236, 0.2);
+}
+
+/* Name Physics Section - FRONT AND CENTER */
+.name-section {
+    position: relative;
+    min-height: 600px;
+    margin-top: 80px;
+    margin-bottom: 60px;
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+    padding: 20px;
+    backdrop-filter: blur(5px);
+    box-shadow:
+        0 0 40px rgba(131, 56, 236, 0.3),
+        0 0 80px rgba(255, 0, 110, 0.2),
+        inset 0 0 60px rgba(131, 56, 236, 0.1);
+    border: 2px solid rgba(131, 56, 236, 0.3);
+}
+
+#physics-container {
+    width: 100%;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    background: transparent;
+}
+
+canvas {
+    border-radius: 10px;
+}
+
+.reset-button {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    padding: 12px 28px;
+    background: linear-gradient(135deg, #FF006E, #8338EC);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow:
+        0 4px 20px rgba(131, 56, 236, 0.5),
+        0 0 20px rgba(255, 0, 110, 0.3);
+    z-index: 1000;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.reset-button:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 6px 30px rgba(131, 56, 236, 0.7),
+        0 0 30px rgba(255, 0, 110, 0.5);
+    background: linear-gradient(135deg, #FF2E63, #9F4FEC);
+}
+
+.reset-button:active {
+    transform: translateY(-1px);
+}
+
+/* Bio Section */
+.bio-section {
+    background: rgba(20, 20, 40, 0.6);
+    padding: 50px;
+    border-radius: 20px;
+    margin-bottom: 40px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(58, 134, 255, 0.2);
+    border: 2px solid rgba(58, 134, 255, 0.3);
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.bio-section h2 {
+    background: linear-gradient(135deg, #FF006E, #8338EC, #3A86FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 25px;
+    font-size: 2.5em;
+    font-weight: 700;
+}
+
+.bio-section p {
+    margin-bottom: 30px;
+    font-size: 1.2em;
+    color: #E0E0E0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.cta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 15px 35px;
+    background: linear-gradient(135deg, #8338EC, #3A86FF);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(131, 56, 236, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.cta-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 30px rgba(131, 56, 236, 0.6);
+}
+
+.cta-btn.secondary {
+    background: linear-gradient(135deg, #FF006E, #FB5607);
+    box-shadow: 0 4px 20px rgba(255, 0, 110, 0.4);
+}
+
+.cta-btn.secondary:hover {
+    box-shadow: 0 6px 30px rgba(255, 0, 110, 0.6);
+}
+
+/* Resume Page Styles */
+.resume-section {
+    background: rgba(20, 20, 40, 0.6);
+    padding: 50px;
+    border-radius: 20px;
+    margin-top: 100px;
+    margin-bottom: 40px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(131, 56, 236, 0.2);
+    border: 2px solid rgba(131, 56, 236, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.resume-section h1 {
+    background: linear-gradient(135deg, #FF006E, #8338EC, #3A86FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: #B0B0B0;
+    font-size: 1.3em;
+    margin-bottom: 30px;
+    font-style: italic;
+}
+
+.resume-section h2 {
+    color: #FFFFFF;
+    margin-top: 40px;
+    margin-bottom: 20px;
+    font-size: 2em;
+    padding-bottom: 10px;
+    border-bottom: 3px solid;
+    border-image: linear-gradient(90deg, #FF006E, #8338EC, #3A86FF) 1;
+}
+
+.resume-section h3 {
+    color: #FFFFFF;
+    margin-bottom: 8px;
+    font-size: 1.4em;
+}
+
+.resume-section h4 {
+    color: #3A86FF;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+
+.resume-content {
+    margin-top: 40px;
+}
+
+.date {
+    color: #B0B0B0;
+    font-style: italic;
+    margin-bottom: 15px;
+    display: block;
+}
+
+.experience-item,
+.education-item {
+    margin-bottom: 35px;
+    padding: 25px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    border-left: 4px solid #8338EC;
+}
+
+.experience-item ul {
+    margin-left: 25px;
+    margin-top: 15px;
+}
+
+.experience-item li {
+    margin-bottom: 12px;
+    color: #D0D0D0;
+    line-height: 1.7;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.skill-category {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 25px;
+    border-radius: 12px;
+    border: 2px solid rgba(131, 56, 236, 0.3);
+}
+
+.skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 15px;
+}
+
+.skill-tag {
+    background: linear-gradient(135deg, #8338EC, #3A86FF);
+    color: white;
+    padding: 10px 18px;
+    border-radius: 20px;
+    font-size: 0.95em;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(131, 56, 236, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 15px 35px;
+    background: linear-gradient(135deg, #FF006E, #FB5607);
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.1em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 20px rgba(255, 0, 110, 0.5);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.download-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 30px rgba(255, 0, 110, 0.7);
+}
+
+.resume-section a {
+    color: #3A86FF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.resume-section a:hover {
+    color: #06FFA5;
+    text-decoration: underline;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 40px;
+    color: rgba(255, 255, 255, 0.6);
+    margin-top: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .navbar {
+        padding: 15px 20px;
+        gap: 15px;
+    }
+
+    .nav-link {
+        font-size: 1em;
+        padding: 8px 15px;
+    }
+
+    .bio-section,
+    .resume-section {
+        padding: 30px 20px;
+    }
+
+    .name-section {
+        min-height: 400px;
+        margin-top: 70px;
+    }
+
+    #physics-container {
+        height: 400px;
+    }
+
+    .reset-button {
+        top: 15px;
+        right: 15px;
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+
+    .bio-section h2 {
+        font-size: 2em;
+    }
+
+    .resume-section h1 {
+        font-size: 2.2em;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .cta-btn {
+        width: 100%;
+        max-width: 300px;
+        justify-content: center;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+}

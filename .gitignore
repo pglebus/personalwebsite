@@ -1,0 +1,25 @@
+# Documentation files (not needed in production)
+README.md
+TRACKING_SETUP.md
+
+# Resume PDF (add your actual resume separately)
+resume.pdf
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Logs
+*.log
+npm-debug.log*
+
+# Environment files
+.env
+.env.local

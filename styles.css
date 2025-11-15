@@ -514,12 +514,14 @@ footer {
     }
 
     .name-section {
-        min-height: 400px;
+        min-height: 700px;
         margin-top: 70px;
     }
 
     #physics-container {
-        height: 400px;
+        height: 700px;
+        max-width: 400px;
+        margin: 0 auto;
     }
 
     .reset-button {

@@ -52,8 +52,10 @@ Composite.add(world, walls);
 
 // Function to create letter blocks
 function createLetterBlock(letter, x, y) {
-    const blockWidth = 80;
-    const blockHeight = 90;
+    // Smaller blocks on mobile
+    const isMobile = width < 500;
+    const blockWidth = isMobile ? 55 : 80;
+    const blockHeight = isMobile ? 65 : 90;
 
     // Darker galaxy colors - deep space theme
     const galaxyColors = [
@@ -109,16 +111,40 @@ function initializeBlocks() {
 
     // Create new blocks - filter out spaces
     const letters = YOUR_NAME.split('').filter(letter => letter !== ' ');
-    const startX = width / 2 - (letters.length * 45);
-    const startY = height / 3;
 
-    letters.forEach((letter, index) => {
-        const x = startX + (index * 90);
-        const y = startY + Math.random() * 30; // slight random offset
-        const block = createLetterBlock(letter, x, y);
-        letterBlocks.push(block);
-        Composite.add(world, block);
-    });
+    // Check if mobile (narrow screen)
+    const isMobile = width < 500;
+
+    if (isMobile) {
+        // Mobile: Stack vertically in fewer columns
+        const blocksPerRow = 3;
+        const blockSpacing = 70;
+        const rowSpacing = 80;
+        const startX = width / 2 - blockSpacing;
+        const startY = 100;
+
+        letters.forEach((letter, index) => {
+            const row = Math.floor(index / blocksPerRow);
+            const col = index % blocksPerRow;
+            const x = startX + (col * blockSpacing);
+            const y = startY + (row * rowSpacing) + Math.random() * 15;
+            const block = createLetterBlock(letter, x, y);
+            letterBlocks.push(block);
+            Composite.add(world, block);
+        });
+    } else {
+        // Desktop: Horizontal layout
+        const startX = width / 2 - (letters.length * 45);
+        const startY = height / 3;
+
+        letters.forEach((letter, index) => {
+            const x = startX + (index * 90);
+            const y = startY + Math.random() * 30;
+            const block = createLetterBlock(letter, x, y);
+            letterBlocks.push(block);
+            Composite.add(world, block);
+        });
+    }
 }
 
 // Initialize blocks on load
@@ -150,12 +176,13 @@ Render.run(render);
 Events.on(render, 'afterRender', function() {
     const context = render.context;
     const time = Date.now() * 0.001; // For animation
+    const isMobile = width < 500;
 
     letterBlocks.forEach(block => {
         const pos = block.position;
         const angle = block.angle;
-        const blockWidth = 80;
-        const blockHeight = 90;
+        const blockWidth = isMobile ? 55 : 80;
+        const blockHeight = isMobile ? 65 : 90;
 
         context.save();
         context.translate(pos.x, pos.y);
@@ -199,7 +226,7 @@ Events.on(render, 'afterRender', function() {
         context.shadowColor = 'rgba(255, 255, 255, 0.9)';
         context.shadowBlur = 15;
         context.fillStyle = '#FFFFFF';
-        context.font = 'bold 48px Arial';
+        context.font = isMobile ? 'bold 34px Arial' : 'bold 48px Arial';
         context.textAlign = 'center';
         context.textBaseline = 'middle';
         context.fillText(block.label, 0, 0);

@@ -116,18 +116,27 @@ function initializeBlocks() {
     const isMobile = width < 500;
 
     if (isMobile) {
-        // Mobile: Stack vertically in fewer columns
-        const blocksPerRow = 3;
-        const blockSpacing = 70;
-        const rowSpacing = 80;
-        const startX = width / 2 - blockSpacing;
-        const startY = 100;
+        // Mobile: Stack vertically in order - PATRICK on top, GLEBUS below
+        const firstNameLength = 7; // PATRICK
+        const blockSpacing = 65;
+        const rowSpacing = 90;
 
         letters.forEach((letter, index) => {
-            const row = Math.floor(index / blocksPerRow);
-            const col = index % blocksPerRow;
-            const x = startX + (col * blockSpacing);
-            const y = startY + (row * rowSpacing) + Math.random() * 15;
+            let x, y;
+
+            if (index < firstNameLength) {
+                // PATRICK - first row, centered
+                const firstRowStartX = width / 2 - (firstNameLength * blockSpacing / 2) + blockSpacing / 2;
+                x = firstRowStartX + (index * blockSpacing);
+                y = 120;
+            } else {
+                // GLEBUS - second row, centered
+                const secondRowLength = letters.length - firstNameLength;
+                const secondRowStartX = width / 2 - (secondRowLength * blockSpacing / 2) + blockSpacing / 2;
+                x = secondRowStartX + ((index - firstNameLength) * blockSpacing);
+                y = 120 + rowSpacing;
+            }
+
             const block = createLetterBlock(letter, x, y);
             letterBlocks.push(block);
             Composite.add(world, block);
@@ -240,28 +249,40 @@ document.getElementById('reset-btn').addEventListener('click', function() {
     initializeBlocks();
 });
 
-// Handle window resize
+// Handle window resize - debounced to prevent mobile scroll issues
+let resizeTimer;
 window.addEventListener('resize', function() {
+    // Clear existing timer
+    clearTimeout(resizeTimer);
+
+    // Only resize if width actually changed (not just mobile scroll)
     const newWidth = container.offsetWidth;
     const newHeight = container.offsetHeight;
 
-    render.canvas.width = newWidth;
-    render.canvas.height = newHeight;
-    render.options.width = newWidth;
-    render.options.height = newHeight;
+    if (Math.abs(newWidth - width) < 10 && Math.abs(newHeight - height) < 10) {
+        return; // Ignore tiny changes from mobile scrolling
+    }
 
-    // Update walls
-    Composite.remove(world, walls[0]);
-    Composite.remove(world, walls[1]);
-    Composite.remove(world, walls[2]);
-    Composite.remove(world, walls[3]);
+    // Wait for resize to finish before reinitializing
+    resizeTimer = setTimeout(function() {
+        render.canvas.width = newWidth;
+        render.canvas.height = newHeight;
+        render.options.width = newWidth;
+        render.options.height = newHeight;
 
-    walls[0] = Bodies.rectangle(newWidth / 2, 0, newWidth, 10, wallOptions);
-    walls[1] = Bodies.rectangle(newWidth / 2, newHeight, newWidth, 10, wallOptions);
-    walls[2] = Bodies.rectangle(0, newHeight / 2, 10, newHeight, wallOptions);
-    walls[3] = Bodies.rectangle(newWidth, newHeight / 2, 10, newHeight, wallOptions);
+        // Update walls
+        Composite.remove(world, walls[0]);
+        Composite.remove(world, walls[1]);
+        Composite.remove(world, walls[2]);
+        Composite.remove(world, walls[3]);
 
-    Composite.add(world, walls);
+        walls[0] = Bodies.rectangle(newWidth / 2, 0, newWidth, 10, wallOptions);
+        walls[1] = Bodies.rectangle(newWidth / 2, newHeight, newWidth, 10, wallOptions);
+        walls[2] = Bodies.rectangle(0, newHeight / 2, 10, newHeight, wallOptions);
+        walls[3] = Bodies.rectangle(newWidth, newHeight / 2, 10, newHeight, wallOptions);
 
-    initializeBlocks();
+        Composite.add(world, walls);
+
+        initializeBlocks();
+    }, 250); // Wait 250ms after resize stops
 });

@@ -116,17 +116,16 @@ function initializeBlocks() {
     const isMobile = width < 500;
 
     if (isMobile) {
-        // Mobile: 4 rows - PAT, RICK, GLE, BUS
+        // Mobile: 3 rows - PAT, RICK, GLEBUS
         const rows = [
             { letters: 'PAT', start: 0 },
             { letters: 'RICK', start: 3 },
-            { letters: 'GLE', start: 7 },
-            { letters: 'BUS', start: 10 }
+            { letters: 'GLEBUS', start: 7 }
         ];
 
-        const blockSpacing = 70;
-        const rowSpacing = 85;
-        const startY = 150; // Start lower to reduce falling
+        const blockSpacing = 65;
+        const rowSpacing = 90;
+        const startY = 180; // Start lower to reduce falling
 
         rows.forEach((row, rowIndex) => {
             const rowLength = row.letters.length;

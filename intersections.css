@@ -1,0 +1,406 @@
+/* Game Section */
+.game-section {
+    background: rgba(20, 20, 40, 0.6);
+    padding: 50px;
+    border-radius: 20px;
+    margin-top: 100px;
+    margin-bottom: 40px;
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.5),
+        0 0 40px rgba(131, 56, 236, 0.2);
+    border: 2px solid rgba(131, 56, 236, 0.3);
+    backdrop-filter: blur(10px);
+    text-align: center;
+}
+
+.game-section h1 {
+    background: linear-gradient(135deg, #FF006E, #8338EC, #3A86FF);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.game-subtitle {
+    color: #B0B0B0;
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.game-info {
+    display: flex;
+    justify-content: space-between;
+    max-width: 600px;
+    margin: 0 auto 30px;
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    font-size: 1.1em;
+    color: #E0E0E0;
+}
+
+.attempts-remaining {
+    font-weight: 600;
+}
+
+#attempts {
+    color: #3A86FF;
+    font-weight: 700;
+}
+
+/* Clover Board */
+.clover-container {
+    display: flex;
+    justify-content: center;
+    margin: 40px 0;
+}
+
+.clover-board {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 15px;
+    width: 500px;
+    height: 500px;
+    max-width: 90vw;
+    max-height: 90vw;
+}
+
+/* Card Slots */
+.card-slot {
+    background: rgba(0, 0, 0, 0.5);
+    border: 3px solid rgba(131, 56, 236, 0.5);
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    min-height: 140px;
+}
+
+.card-slot:hover {
+    border-color: #8338EC;
+    box-shadow: 0 0 20px rgba(131, 56, 236, 0.5);
+}
+
+.card-slot[data-position="top"] {
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.card-slot[data-position="right"] {
+    grid-column: 3;
+    grid-row: 2;
+}
+
+.card-slot[data-position="bottom"] {
+    grid-column: 2;
+    grid-row: 3;
+}
+
+.card-slot[data-position="left"] {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+.empty-slot {
+    font-size: 3em;
+    color: rgba(255, 255, 255, 0.2);
+    font-weight: 700;
+}
+
+/* Clues */
+.clue {
+    background: rgba(255, 0, 110, 0.2);
+    border: 2px solid rgba(255, 0, 110, 0.5);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    font-size: 0.9em;
+    color: #FFFFFF;
+    font-weight: 600;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 0, 110, 0.3);
+}
+
+.clue-top-right {
+    grid-column: 3;
+    grid-row: 1;
+}
+
+.clue-top-left {
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.clue-bottom-right {
+    grid-column: 3;
+    grid-row: 3;
+}
+
+.clue-bottom-left {
+    grid-column: 1;
+    grid-row: 3;
+}
+
+.clue-text {
+    word-break: break-word;
+}
+
+/* Center */
+.clover-center {
+    grid-column: 2;
+    grid-row: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.clover-center svg {
+    width: 60px;
+    height: 60px;
+}
+
+/* Cards Pool */
+.cards-container {
+    margin: 40px 0;
+}
+
+.cards-container h3 {
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.cards-pool {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.card {
+    background: linear-gradient(135deg, #8338EC, #3A86FF);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 12px;
+    padding: 20px 30px;
+    font-size: 1.2em;
+    font-weight: 600;
+    color: #FFFFFF;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(131, 56, 236, 0.4);
+    min-width: 140px;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 25px rgba(131, 56, 236, 0.6);
+}
+
+.card.selected {
+    background: linear-gradient(135deg, #FF006E, #FB5607);
+    box-shadow: 0 6px 25px rgba(255, 0, 110, 0.6);
+    transform: scale(1.05);
+}
+
+.card.placed {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.card.locked {
+    background: linear-gradient(135deg, #06FFA5, #00D9FF);
+    border-color: #06FFA5;
+}
+
+.card.incorrect {
+    background: linear-gradient(135deg, #FF006E, #8B0000);
+    border-color: #FF006E;
+}
+
+/* Placed card in slot */
+.card-slot .card {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: auto;
+}
+
+.card-slot.locked {
+    border-color: #06FFA5;
+    box-shadow: 0 0 20px rgba(6, 255, 165, 0.5);
+}
+
+.card-slot.incorrect {
+    border-color: #FF006E;
+    box-shadow: 0 0 20px rgba(255, 0, 110, 0.5);
+}
+
+/* Game Actions */
+.game-actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin: 30px 0;
+}
+
+.submit-btn,
+.reset-btn {
+    padding: 15px 40px;
+    font-size: 1.1em;
+    font-weight: 600;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    color: #FFFFFF;
+}
+
+.submit-btn {
+    background: linear-gradient(135deg, #FF006E, #FB5607);
+    box-shadow: 0 4px 20px rgba(255, 0, 110, 0.4);
+}
+
+.submit-btn:hover:not(:disabled) {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 30px rgba(255, 0, 110, 0.6);
+}
+
+.submit-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.reset-btn {
+    background: linear-gradient(135deg, #8338EC, #3A86FF);
+    box-shadow: 0 4px 20px rgba(131, 56, 236, 0.4);
+}
+
+.reset-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 30px rgba(131, 56, 236, 0.6);
+}
+
+/* Result Message */
+.result-message {
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.2em;
+    font-weight: 600;
+    max-width: 600px;
+}
+
+.result-message.hidden {
+    display: none;
+}
+
+.result-message.success {
+    background: rgba(6, 255, 165, 0.2);
+    border: 2px solid #06FFA5;
+    color: #06FFA5;
+}
+
+.result-message.partial {
+    background: rgba(255, 165, 0, 0.2);
+    border: 2px solid #FFA500;
+    color: #FFA500;
+}
+
+.result-message.failure {
+    background: rgba(255, 0, 110, 0.2);
+    border: 2px solid #FF006E;
+    color: #FF006E;
+}
+
+/* Instructions */
+.instructions {
+    margin-top: 40px;
+    padding: 30px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 12px;
+    border: 2px solid rgba(58, 134, 255, 0.3);
+    text-align: left;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.instructions h3 {
+    color: #3A86FF;
+    margin-bottom: 15px;
+    font-size: 1.5em;
+}
+
+.instructions p {
+    color: #D0D0D0;
+    margin-bottom: 10px;
+    line-height: 1.6;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-section {
+        padding: 30px 20px;
+        margin-top: 80px;
+    }
+
+    .game-section h1 {
+        font-size: 2.2em;
+    }
+
+    .clover-board {
+        width: 90vw;
+        height: 90vw;
+        gap: 8px;
+    }
+
+    .card-slot {
+        min-height: 100px;
+    }
+
+    .empty-slot {
+        font-size: 2em;
+    }
+
+    .clue {
+        font-size: 0.75em;
+        padding: 8px;
+    }
+
+    .card {
+        padding: 15px 20px;
+        font-size: 1em;
+        min-width: 120px;
+    }
+
+    .game-actions {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .submit-btn,
+    .reset-btn {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .game-info {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+}

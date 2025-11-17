@@ -1,0 +1,67 @@
+{
+  "puzzles": [
+    {
+      "solution": {
+        "top": "PYTHON",
+        "right": "JAVA",
+        "bottom": "SQL",
+        "left": "HTML"
+      },
+      "clues": [
+        "OOP",
+        "Scripting",
+        "Database",
+        "Web"
+      ],
+      "decoys": ["RUST", "SWIFT"]
+    },
+    {
+        "solution": {
+          "top": "TONGUE",
+          "right": "COLD",
+          "bottom": "RED",
+          "left": "SING"
+        },
+        "clues": [
+          "MINT",
+          "TIMBRE",
+          "PROMETHAZINE",
+          "SWIFT"
+        ],
+        "decoys": [
+          "ARM",
+          "WATCH"
+        ]
+    },
+    {
+      "solution": {
+        "top": "KEYBOARD",
+        "right": "MOUSE",
+        "bottom": "MONITOR",
+        "left": "HEADSET"
+      },
+      "clues": [
+        "Input",
+        "Typing",
+        "Display",
+        "Audio"
+      ],
+      "decoys": ["PRINTER", "WEBCAM"]
+    },
+    {
+      "solution": {
+        "top": "SPRING",
+        "right": "SUMMER",
+        "bottom": "FALL",
+        "left": "WINTER"
+      },
+      "clues": [
+        "Warm",
+        "Flowers",
+        "Leaves",
+        "Cold"
+      ],
+      "decoys": ["RAIN", "SNOW"]
+    }
+  ]
+}

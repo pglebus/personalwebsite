@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Intersections - Patrick Glebus</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="intersections.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="resume.html" class="nav-link">Resume</a>
+        <a href="intersections.html" class="nav-link active">Daily Intersections</a>
+    </nav>
+
+    <div class="container">
+        <!-- Game Section -->
+        <section class="game-section">
+            <h1>Daily Intersections</h1>
+            <p class="game-subtitle">Match the words to their clues. You have 2 attempts!</p>
+
+            <div class="game-info">
+                <div class="attempts-remaining">Attempts: <span id="attempts">2</span>/2</div>
+                <div class="puzzle-date">Puzzle #<span id="puzzle-number">1</span></div>
+            </div>
+
+            <!-- Clover Board -->
+            <div class="clover-container">
+                <div class="clover-board">
+                    <!-- Top Position -->
+                    <div class="card-slot" data-position="top">
+                        <div class="empty-slot">?</div>
+                    </div>
+
+                    <!-- Clue: Top-Right -->
+                    <div class="clue clue-top-right" data-clue="0">
+                        <span class="clue-text" id="clue-0">Loading...</span>
+                    </div>
+
+                    <!-- Right Position -->
+                    <div class="card-slot" data-position="right">
+                        <div class="empty-slot">?</div>
+                    </div>
+
+                    <!-- Clue: Top-Left -->
+                    <div class="clue clue-top-left" data-clue="1">
+                        <span class="clue-text" id="clue-1">Loading...</span>
+                    </div>
+
+                    <!-- Center (decorative) -->
+                    <div class="clover-center">
+                        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="50" cy="50" r="20" fill="rgba(131, 56, 236, 0.3)" stroke="#8338EC" stroke-width="2"/>
+                        </svg>
+                    </div>
+
+                    <!-- Clue: Bottom-Right -->
+                    <div class="clue clue-bottom-right" data-clue="2">
+                        <span class="clue-text" id="clue-2">Loading...</span>
+                    </div>
+
+                    <!-- Left Position -->
+                    <div class="card-slot" data-position="left">
+                        <div class="empty-slot">?</div>
+                    </div>
+
+                    <!-- Clue: Bottom-Left -->
+                    <div class="clue clue-bottom-left" data-clue="3">
+                        <span class="clue-text" id="clue-3">Loading...</span>
+                    </div>
+
+                    <!-- Bottom Position -->
+                    <div class="card-slot" data-position="bottom">
+                        <div class="empty-slot">?</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Available Cards -->
+            <div class="cards-container">
+                <h3>Available Words</h3>
+                <div class="cards-pool" id="cards-pool">
+                    <!-- Cards will be generated here by JS -->
+                </div>
+            </div>
+
+            <!-- Submit Button -->
+            <div class="game-actions">
+                <button id="submit-btn" class="submit-btn" disabled>Submit Answer</button>
+                <button id="reset-btn" class="reset-btn">Reset Board</button>
+            </div>
+
+            <!-- Result Message -->
+            <div id="result-message" class="result-message hidden"></div>
+
+            <!-- Instructions -->
+            <div class="instructions">
+                <h3>How to Play</h3>
+                <p>Click on a word card, then click on an empty slot to place it. Each clue relates to the two words adjacent to it.</p>
+                <p>You have 2 attempts. After the first incorrect attempt, correct cards will lock in place.</p>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2025 Patrick Glebus. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script src="intersections.js"></script>
+</body>
+</html>

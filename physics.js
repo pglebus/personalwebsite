@@ -116,30 +116,30 @@ function initializeBlocks() {
     const isMobile = width < 500;
 
     if (isMobile) {
-        // Mobile: Stack vertically in order - PATRICK on top, GLEBUS below
-        const firstNameLength = 7; // PATRICK
-        const blockSpacing = 65;
-        const rowSpacing = 90;
+        // Mobile: 4 rows - PAT, RICK, GLE, BUS
+        const rows = [
+            { letters: 'PAT', start: 0 },
+            { letters: 'RICK', start: 3 },
+            { letters: 'GLE', start: 7 },
+            { letters: 'BUS', start: 10 }
+        ];
 
-        letters.forEach((letter, index) => {
-            let x, y;
+        const blockSpacing = 70;
+        const rowSpacing = 85;
+        const startY = 150; // Start lower to reduce falling
 
-            if (index < firstNameLength) {
-                // PATRICK - first row, centered
-                const firstRowStartX = width / 2 - (firstNameLength * blockSpacing / 2) + blockSpacing / 2;
-                x = firstRowStartX + (index * blockSpacing);
-                y = 120;
-            } else {
-                // GLEBUS - second row, centered
-                const secondRowLength = letters.length - firstNameLength;
-                const secondRowStartX = width / 2 - (secondRowLength * blockSpacing / 2) + blockSpacing / 2;
-                x = secondRowStartX + ((index - firstNameLength) * blockSpacing);
-                y = 120 + rowSpacing;
+        rows.forEach((row, rowIndex) => {
+            const rowLength = row.letters.length;
+            const rowStartX = width / 2 - (rowLength * blockSpacing / 2) + blockSpacing / 2;
+            const y = startY + (rowIndex * rowSpacing);
+
+            for (let i = 0; i < rowLength; i++) {
+                const letterIndex = row.start + i;
+                const x = rowStartX + (i * blockSpacing);
+                const block = createLetterBlock(letters[letterIndex], x, y);
+                letterBlocks.push(block);
+                Composite.add(world, block);
             }
-
-            const block = createLetterBlock(letter, x, y);
-            letterBlocks.push(block);
-            Composite.add(world, block);
         });
     } else {
         // Desktop: Horizontal layout

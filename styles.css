@@ -360,8 +360,30 @@ canvas {
 .subtitle {
     color: #B0B0B0;
     font-size: 1.3em;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-style: italic;
+}
+
+.contact-info {
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.contact-info p {
+    font-size: 1.1em;
+    color: #E0E0E0;
+}
+
+.contact-info a {
+    color: #3A86FF;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.contact-info a:hover {
+    color: #06FFA5;
+    text-decoration: underline;
 }
 
 .resume-section h2 {

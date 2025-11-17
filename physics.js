@@ -57,14 +57,12 @@ function createLetterBlock(letter, x, y) {
     const blockWidth = isMobile ? 55 : 80;
     const blockHeight = isMobile ? 65 : 90;
 
-    // Darker galaxy colors - deep space theme
+    // Sophisticated black with subtle variations
     const galaxyColors = [
-        { primary: '#0a0015', secondary: '#1a0033', accent: '#2d0052' }, // Deep purple
-        { primary: '#000a1a', secondary: '#001433', accent: '#002966' }, // Deep blue
-        { primary: '#0f0015', secondary: '#1f0033', accent: '#3d0066' }, // Deep magenta
-        { primary: '#000d1a', secondary: '#001a33', accent: '#003d66' }, // Dark cyan
-        { primary: '#0d0500', secondary: '#1a0f00', accent: '#332200' }, // Dark amber
-        { primary: '#050d0d', secondary: '#0a1a1a', accent: '#143333' }  // Dark teal
+        { primary: '#000000', secondary: '#0a0a0a', accent: '#1a1a1a' }, // Pure black
+        { primary: '#020202', secondary: '#0d0d0d', accent: '#1c1c1c' }, // Deep charcoal
+        { primary: '#010101', secondary: '#0b0b0b', accent: '#191919' }, // Near black
+        { primary: '#000000', secondary: '#0c0c0c', accent: '#1e1e1e' }  // Matte black
     ];
 
     const galaxyTheme = galaxyColors[Math.floor(Math.random() * galaxyColors.length)];
@@ -209,16 +207,17 @@ Events.on(render, 'afterRender', function() {
         block.stardust.forEach((star, index) => {
             // Twinkling effect
             const twinkle = Math.sin(time * 2 + index) * 0.5 + 0.5;
-            const alpha = star.brightness * twinkle;
+            const alpha = star.brightness * twinkle * 0.6; // More muted
 
-            context.fillStyle = `rgba(255, 255, 255, ${alpha})`;
+            // Muted gold sparkles (warmer gold tone)
+            context.fillStyle = `rgba(255, 215, 150, ${alpha})`;
             context.beginPath();
             context.arc(star.x, star.y, star.size, 0, Math.PI * 2);
             context.fill();
 
-            // Add glow to bigger stars
+            // Add subtle glow to bigger stars
             if (star.size > 1.5) {
-                context.fillStyle = `rgba(255, 255, 255, ${alpha * 0.3})`;
+                context.fillStyle = `rgba(255, 215, 150, ${alpha * 0.2})`;
                 context.beginPath();
                 context.arc(star.x, star.y, star.size * 2, 0, Math.PI * 2);
                 context.fill();
